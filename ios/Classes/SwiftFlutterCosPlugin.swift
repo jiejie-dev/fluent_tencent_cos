@@ -3,7 +3,7 @@ import UIKit
 
 public class SwiftFlutterCosPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "flutter_cos", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "fluent_cos", binaryMessenger: registrar.messenger())
     let instance = SwiftFlutterCosPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }

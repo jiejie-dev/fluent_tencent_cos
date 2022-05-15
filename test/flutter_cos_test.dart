@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_cos/flutter_cos.dart';
+import 'package:fluent_cos/cos.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('flutter_cos');
+  const MethodChannel channel = MethodChannel('fluent_cos');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 

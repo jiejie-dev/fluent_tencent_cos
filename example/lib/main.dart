@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_cos/flutter_cos.dart';
+import 'package:fluent_cos/cos.dart';
 
 void main() {
   runApp(const MyApp());

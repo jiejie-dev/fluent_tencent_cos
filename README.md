@@ -1,4 +1,4 @@
-# flutter_cos
+# fluent_cos
 
 A tencent COS Upload Plugin.
 

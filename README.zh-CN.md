@@ -1,4 +1,4 @@
-# flutter_cos
+# fluent_cos
 
 一个腾讯云上传插件。
 

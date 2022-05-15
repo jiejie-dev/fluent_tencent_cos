@@ -1,15 +1,15 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run 'pod lib lint flutter_cos.podspec' to validate before publishing.
+# Run 'pod lib lint fluent_cos.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_cos'
+  s.name             = 'fluent_cos'
   s.version          = '0.0.1'
   s.summary          = 'A tencent cos util'
   s.description      = <<-DESC
 A tencent cos util
                        DESC
-  s.homepage         = 'https://github.com/lijianqiang12/flutter_cos'
+  s.homepage         = 'https://github.com/lijianqiang12/fluent_cos'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'lijianqiang125@gmail.com' }
   s.source           = { :path => '.' }

@@ -1,10 +1,9 @@
-
 import 'dart:async';
 
 import 'package:flutter/services.dart';
 
 class FlutterCos {
-  static const MethodChannel _channel = MethodChannel('flutter_cos');
+  static const MethodChannel _channel = MethodChannel('fluent_cos');
 
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
@@ -38,7 +37,8 @@ class FlutterCos {
     });
   }
 
-  static void setMethodCallHandler(Future<dynamic> Function(MethodCall call) handler) {
+  static void setMethodCallHandler(
+      Future<dynamic> Function(MethodCall call) handler) {
     _channel.setMethodCallHandler(handler);
   }
 }

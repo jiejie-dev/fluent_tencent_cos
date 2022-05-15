@@ -1,4 +1,4 @@
-package com.shuge888.flutter_cos
+package dev.jiejie.fluent_cos
 
 import com.tencent.qcloud.core.auth.BasicLifecycleCredentialProvider
 import com.tencent.qcloud.core.auth.QCloudLifecycleCredentials

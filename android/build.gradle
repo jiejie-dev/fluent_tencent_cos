@@ -1,4 +1,4 @@
-group 'com.shuge888.flutter_cos'
+group 'dev.jiejie.fluent_cos'
 version '1.0-SNAPSHOT'
 
 buildscript {

@@ -1,4 +1,4 @@
-package com.shuge888.flutter_cos
+package dev.jiejie.fluent_cos
 
 import android.app.Activity
 import android.content.Context
@@ -37,7 +37,7 @@ class FlutterCosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
   private var mActivity: Activity? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.getFlutterEngine().dartExecutor, "flutter_cos")
+    channel = MethodChannel(flutterPluginBinding.getFlutterEngine().dartExecutor, "fluent_cos")
     mContext = flutterPluginBinding.applicationContext
     channel?.setMethodCallHandler(this)
   }

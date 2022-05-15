@@ -1,7 +1,7 @@
-name: flutter_cos
+name: fluent_cos
 description: A tencent cos util
 version: 0.0.2
-homepage: https://github.com/lijianqiang12/flutter_cos
+homepage: https://github.com/lijianqiang12/fluent_cos
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
@@ -28,7 +28,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.shuge888.flutter_cos
+        package: dev.jiejie.fluent_cos
         pluginClass: FlutterCosPlugin
       ios:
         pluginClass: FlutterCosPlugin

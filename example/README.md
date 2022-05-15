@@ -1,6 +1,6 @@
-# flutter_cos_example
+# fluent_cos_example
 
-Demonstrates how to use the flutter_cos plugin.
+Demonstrates how to use the fluent_cos plugin.
 
 ## Getting Started
 
