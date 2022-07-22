@@ -1,4 +1,4 @@
-# fluent_cos
+# fluent_tencent_cos
 
 A tencent COS Upload Plugin.
 
@@ -16,3 +16,4 @@ If you are involved in any infringement, please contact me for removal.
 
 Reference Document: https://github.com/OpenFlutter/tencent_cos
 
+# fluent_tencent_cos
