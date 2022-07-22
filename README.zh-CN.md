@@ -1,4 +1,4 @@
-# fluent_cos
+# fluent_tencent_cos
 
 一个腾讯云上传插件。
 

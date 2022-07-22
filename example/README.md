@@ -1,6 +1,6 @@
-# fluent_cos_example
+# fluent_tencent_cos_example
 
-Demonstrates how to use the fluent_cos plugin.
+Demonstrates how to use the fluent_tencent_cos plugin.
 
 ## Getting Started
 

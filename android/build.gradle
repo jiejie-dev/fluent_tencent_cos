@@ -1,4 +1,4 @@
-group 'dev.jiejie.fluent_cos'
+group 'dev.jiejie.fluent_tencent_cos'
 version '1.0-SNAPSHOT'
 
 buildscript {

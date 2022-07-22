@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:fluent_cos/cos.dart';
+import 'package:fluent_tencent_cos/cos.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       // platformVersion = await FwCos.platformVersion;
-      platformVersion = await FlutterCos.uploadByFile(
+      platformVersion = await FluentTencentCos.putObject(
           "region",
           "appid",
           "bucket",

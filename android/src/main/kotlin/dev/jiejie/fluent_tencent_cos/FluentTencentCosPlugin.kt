@@ -1,4 +1,4 @@
-package dev.jiejie.fluent_cos
+package dev.jiejie.fluent_tencent_cos
 
 import android.app.Activity
 import android.content.Context
@@ -26,8 +26,8 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 
 
-/** FlutterCosPlugin  */
-class FlutterCosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+/** FluentTencentCosPlugin  */
+class FluentTencentCosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -37,21 +37,17 @@ class FlutterCosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
   private var mActivity: Activity? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.getFlutterEngine().dartExecutor, "fluent_cos")
+    channel = MethodChannel(flutterPluginBinding.getFlutterEngine().dartExecutor, "fluent_tencent_cos")
     mContext = flutterPluginBinding.applicationContext
     channel?.setMethodCallHandler(this)
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method.equals("getPlatformVersion")) {
-      result.success("Android " + Build.VERSION.RELEASE)
-    } else if (call.method.equals("getNative")) {
-      result.success("getNative")
-    } else if (call.method.equals("uploadFile")) {
-      Log.d("onMethodCall", "uploadFile")
-      val secretId: String = call.argument("secretId")!! //secretId
-      val secretKey: String = call.argument("secretKey")!! //secretKey
-      val sessionToken: String = call.argument("sessionToken")!! //secretKey
+    if (call.method.equals("putObject")) {
+      Log.d("onMethodCall", "putObject")
+      val secretId: String = call.argument("accessKeyId")!! //secretId
+      val secretKey: String = call.argument("accessKeySecret")!! //secretKey
+      val securityToken: String = call.argument("securityToken")!! //secretKey
       val expiredTime: Long = call.argument("expiredTime")!! //secretKey
 
       // 此秘钥计算方法与项目中用到的不符合，所以不使用该方法生成秘钥
@@ -60,13 +56,13 @@ class FlutterCosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
       val myCredentialProvider = LocalSessionCredentialProvider(
         secretId,
         secretKey,
-        sessionToken,
+        securityToken,
         expiredTime,
       )
       val region: String = call.argument("region")!! // region
-      val bucket: String = call.argument("bucket")!! // bucket
-      val localPath: String = call.argument("localPath")!! // localPath
-      val cosPath: String= call.argument("cosPath")!! // cosPath
+      val bucket: String = call.argument("bucketName")!! // bucket
+      val localPath: String = call.argument("filePath")!! // localPath
+      val cosPath: String= call.argument("objectName")!! // cosPath
 
       /// 初始化 COS Service
       // 创建 CosXmlServiceConfig 对象，根据需要修改默认的配置参数
@@ -83,37 +79,40 @@ class FlutterCosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
       //上传文件
       val cosxmlUploadTask: COSXMLUploadTask = transferManager.upload(bucket, cosPath, localPath, null)
       val data = HashMap<String, Any>()
+      data["taskId"] = cosPath
       data["localPath"] = localPath
-      data["cosPath"] = cosPath
+      data["objectName"] = cosPath
       Log.d("onMethodCall", "startUpload")
-      cosxmlUploadTask.setCosXmlProgressListener(object : CosXmlProgressListener {
-        override fun onProgress(complete: Long, target: Long) {
-          Log.d("onProgress", "$complete : $target")
-          mActivity?.runOnUiThread {
-            val progress = HashMap<String, Any>()
-            progress["cosPath"] = cosPath
-            progress["localPath"] = localPath
-            progress["progress"] = complete * 100.0 / target
-            channel?.invokeMethod("onProgress", progress)
-          }
+      cosxmlUploadTask.setCosXmlProgressListener { complete, target ->
+        Log.d("onProgress", "$complete : $target")
+        mActivity?.runOnUiThread {
+          val res: MutableMap<String, Any> = java.util.HashMap()
+          res["taskId"] = cosPath
+          res["filePath"] = cosPath
+          res["objectName"] = localPath
+          res["currentSize"] = complete
+          res["totalSize"] = target
+          res["percent"] = complete * 100.0 / target
+          channel?.invokeMethod("onProgress", res)
         }
-      })
+      }
 
       //设置返回结果回调
       cosxmlUploadTask.setCosXmlResultListener(object : CosXmlResultListener {
         override fun onSuccess(request: CosXmlRequest?, httpResult: CosXmlResult) {
           Log.d("onSuccess", httpResult.printResult())
+          val res: MutableMap<String, Any> = java.util.HashMap()
+          res["url"] = httpResult.accessUrl ?: ""
+          res["taskId"] = cosPath
           mActivity?.runOnUiThread{
-            result.success(data)
-            channel?.invokeMethod("onSuccess", cosPath)
+            channel?.invokeMethod("onSuccess", res)
           }
         }
 
         override fun onFail(request: CosXmlRequest?, exception: CosXmlClientException?, serviceException: CosXmlServiceException) {
           Log.d("onFail", exception.toString() + serviceException.toString())
-          data["message"] = exception.toString() + serviceException.toString()
+          data["errorMessage"] = exception.toString() + serviceException.toString()
           mActivity?.runOnUiThread {
-            result.error("400", "error", exception.toString())
             channel?.invokeMethod("onFailed", data)
           }
           if (exception != null) {
@@ -123,6 +122,7 @@ class FlutterCosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
           }
         }
       })
+      result.success(cosPath)
     } else {
       result.notImplemented()
     }

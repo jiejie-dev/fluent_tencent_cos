@@ -1,7 +1,8 @@
-name: fluent_cos
+name: fluent_tencent_cos
 description: A tencent cos util
 version: 0.0.2
-homepage: https://github.com/lijianqiang12/fluent_cos
+homepage: https://github.com/lijianqiang12/fluent_tencent_cos
+publish_to: 'none'
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
@@ -10,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  fluent_object_storage:
+    path: ../fluent_object_storage
 
 dev_dependencies:
   flutter_test:
@@ -28,10 +32,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: dev.jiejie.fluent_cos
-        pluginClass: FlutterCosPlugin
+        package: dev.jiejie.fluent_tencent_cos
+        pluginClass: FluentTencentCosPlugin
       ios:
-        pluginClass: FlutterCosPlugin
+        pluginClass: FluentTencentCosPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

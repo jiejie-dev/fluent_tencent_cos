@@ -1,24 +1,24 @@
-#import "FlutterCosPlugin.h"
+#import "FluentTencentCosPlugin.h"
 #import "QCloudCOSXML/QCloudCOSXML.h"
 //#import "QCloudCOSV4/COSClient.h"
-#if __has_include(<fluent_cos/fluent_cos-Swift.h>)
-#import <fluent_cos/fluent_cos-Swift.h>
+#if __has_include(<fluent_tencent_cos/fluent_tencent_cos-Swift.h>)
+#import <fluent_tencent_cos/fluent_tencent_cos-Swift.h>
 #else
 // Support project import fallback if the generated compatibility header
 // is not copied when this plugin is created as a library.
 // https://forums.swift.org/t/swift-static-libraries-dont-copy-generated-objective-c-header/19816
-#import "fluent_cos-Swift.h"
+#import "fluent_tencent_cos-Swift.h"
 #endif
 
-//@implementation FlutterCosPlugin
+//@implementation FluentTencentCosPlugin
 //+ (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-//  [SwiftFlutterCosPlugin registerWithRegistrar:registrar];
+//  [SwiftFluentTencentCosPlugin registerWithRegistrar:registrar];
 //}
 //@end
 
 
 
-@interface FlutterCosPlugin()<QCloudSignatureProvider>
+@interface FluentTencentCosPlugin()<QCloudSignatureProvider>
 //NSDictionary *arguments;
 
 @property (nonatomic, strong)NSDictionary *arguments;
@@ -26,12 +26,12 @@
 - (id)initWithChannel:(FlutterMethodChannel *)channel;
 @end
 
-@implementation FlutterCosPlugin
+@implementation FluentTencentCosPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"fluent_cos"
+      methodChannelWithName:@"fluent_tencent_cos"
             binaryMessenger:[registrar messenger]];
-  FlutterCosPlugin* instance = [[FlutterCosPlugin alloc] initWithChannel:channel];
+  FluentTencentCosPlugin* instance = [[FluentTencentCosPlugin alloc] initWithChannel:channel];
   [registrar addMethodCallDelegate:instance channel:channel];
 }
 - (id)initWithChannel:(FlutterMethodChannel *)channel;

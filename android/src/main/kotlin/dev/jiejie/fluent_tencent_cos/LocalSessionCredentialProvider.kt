@@ -1,4 +1,4 @@
-package dev.jiejie.fluent_cos
+package dev.jiejie.fluent_tencent_cos
 
 import com.tencent.qcloud.core.auth.BasicLifecycleCredentialProvider
 import com.tencent.qcloud.core.auth.QCloudLifecycleCredentials

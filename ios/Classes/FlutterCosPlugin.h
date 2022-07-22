@@ -1,4 +1,4 @@
 #import <Flutter/Flutter.h>
 
-@interface FlutterCosPlugin : NSObject<FlutterPlugin>
+@interface FluentTencentCosPlugin : NSObject<FlutterPlugin>
 @end

@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluent_cos/cos.dart';
+import 'package:fluent_tencent_cos/cos.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('fluent_cos');
+  const MethodChannel channel = MethodChannel('fluent_tencent_cos');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -15,9 +15,5 @@ void main() {
 
   tearDown(() {
     channel.setMockMethodCallHandler(null);
-  });
-
-  test('getPlatformVersion', () async {
-    expect(await FlutterCos.platformVersion, '42');
   });
 }
