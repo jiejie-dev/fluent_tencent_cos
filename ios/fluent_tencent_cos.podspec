@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A tencent cos util
                        DESC
-  s.homepage         = 'https://github.com/lijianqiang12/fluent_tencent_cos'
+  s.homepage         = 'https://github.com/jiejie-dev/fluent_tencent_cos'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'lijianqiang125@gmail.com' }
+  s.author           = { 'Your Company' => 'jeremaihloo1024@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
